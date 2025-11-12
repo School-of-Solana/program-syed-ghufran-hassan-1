@@ -25,11 +25,22 @@ A decentralized note-taking application built on Solana that allows users to cre
 [TODO: Describe your Solana program's architecture. Explain the main instructions, account structures, and data flow.]
 
 ### PDA Usage
-[TODO: Explain how you implemented Program Derived Addresses (PDAs) in your project. What seeds do you use and why?]
+In my Solana Notes dApp, I implemented a PDA system to create unique, deterministic addresses for storing user notes on-chain. Each note gets its own PDA account derived from a specific seed pattern.
 
 **PDAs Used:**
-- PDA 1: [Purpose and description]
-- PDA 2: [Purpose and description]
+
+Seeds Used: [b"note", author.key().as_ref(), &note_id.to_le_bytes()]
+-  `b"note"`- Constant prefix that namespaces all note accounts.
+- Purpose: Distinguishes note accounts from other potential account types in the program
+- Why: Provides a clear identifier that these accounts belong to the notes functionality
+-  `author.key().as_ref()` - The author's public key as bytes
+- Purpose: Ensures each user has their own isolated note namespace
+- Why: Prevents conflicts between different users' notes and ensures only the author can manage their notes
+- `&note_id.to_le_bytes()` - The note ID converted to little-endian bytes
+- Purpose: Allows users to create multiple notes with different IDs
+- Why: Enables note organization and retrieval by specific IDs within a user's collection
+
+
 
 ### Program Instructions
 [TODO: List and describe all the instructions in your Solana program]
