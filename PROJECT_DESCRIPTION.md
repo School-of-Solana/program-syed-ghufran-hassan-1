@@ -8,22 +8,18 @@
 ## Project Overview
 
 ### Description
-[TODO: Provide a comprehensive description of your dApp. Explain what it does. Be detailed about the core functionality.]
+A decentralized note-taking application built on Solana that allows users to create and store personal notes directly on the blockchain. The application enables users to publish notes with unique identifiers, ensuring secure and permanent storage of their content. Each note is cryptographically linked to its author, providing verifiable ownership and data integrity.
 
 ### Key Features
-[TODO: List the main features of your dApp. Be specific about what users can do.]
 
-- Feature 1: [Description]
-- Feature 2: [Description]
-- ...
-  
+- Feature 1: Create Personalized Notes - Users can publish notes with custom content and unique note IDs, creating a personal collection of on-chain notes.
+- Feature 2: Content Validation - Automatic content length validation ensures notes don't exceed the 280-character limit, maintaining efficient blockchain storage.
+ 
 ### How to Use the dApp
-[TODO: Provide step-by-step instructions for users to interact with your dApp]
-
-1. **Connect Wallet**
-2. **Main Action 1:** [Step-by-step instructions]
-3. **Main Action 2:** [Step-by-step instructions]
-4. ...
+ 
+1. **Main Action 1:** You need to add content
+2. **Main Action 2:** You need to publish note
+ 
 
 ## Program Architecture
 [TODO: Describe your Solana program's architecture. Explain the main instructions, account structures, and data flow.]
