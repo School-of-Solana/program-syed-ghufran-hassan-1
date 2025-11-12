@@ -120,4 +120,4 @@ anchor test
 
 ### Additional Notes for Evaluators
 
-This is my first Solana Dapp and it was excellent learning curve. Since solana was creating issue in compiling on my system so I used solana playground for development.
+This is my first Solana Dapp and it was excellent learning curve. 
