@@ -27,9 +27,8 @@ A decentralized note-taking application built on Solana that allows users to cre
 ### PDA Usage
 In my Solana Notes dApp, I implemented a PDA system to create unique, deterministic addresses for storing user notes on-chain. Each note gets its own PDA account derived from a specific seed pattern.
 
-**PDAs Used:**
-
 Seeds Used: [b"note", author.key().as_ref(), &note_id.to_le_bytes()]
+
 -  `b"note"`- Constant prefix that namespaces all note accounts.
 - Purpose: Distinguishes note accounts from other potential account types in the program
 - Why: Provides a clear identifier that these accounts belong to the notes functionality
@@ -43,23 +42,39 @@ Seeds Used: [b"note", author.key().as_ref(), &note_id.to_le_bytes()]
 
 
 ### Program Instructions
-[TODO: List and describe all the instructions in your Solana program]
+ 
 
 **Instructions Implemented:**
-- Instruction 1: [Description of what it does]
-- Instruction 2: [Description of what it does]
-- ...
+- `publish_note` - Creates and stores a new note on the Solana blockchain
+- Purpose: Allows users to publish personal notes with unique identifiers
+- Parameters:
+- `note_id: u64` - Unique identifier for the note within user's collection
+- `content: String` - The actual note content (max 280 characters)
+- Validation: Ensures content doesn't exceed 280 characters to optimize storage
+- Functionality: Initializes a new PDA account storing the author's public key, note ID, and content
+- Security: Only the signing author can create notes in their own namespace
+
 
 ### Account Structure
 [TODO: Describe your main account structures and their purposes]
 
 ```rust
-// Example account structure (replace with your actual structs)
 #[account]
-pub struct YourAccountName {
-    // Describe each field
+pub struct Note {
+    pub author: Pubkey,    // Stores the wallet address of the note creator
+    pub note_id: u64,      // Unique identifier for organizing multiple notes per user
+    pub content: String,   // The actual note text content with 280-character limit
+}
+
+impl Note {
+    pub const SIZE: usize = 8 +      // discriminator (Anchor internal use)
+                            32 +     // author - stores the 32-byte public key
+                            8 +      // note_id - 8 bytes for u64 identifier
+                            4 + 280; // content - 4 bytes for string length + 280 chars max
 }
 ```
+
+
 
 ## Testing
 
