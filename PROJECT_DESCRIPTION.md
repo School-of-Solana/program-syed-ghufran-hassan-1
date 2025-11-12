@@ -83,7 +83,7 @@ impl Note {
 
 - Efficient Storage: Fixed size allocation optimizes rent costs
 
-## Context Account Structure:
+### Context Account Structure:
 
 ```rust
 pub struct PublishNote<'info> {
