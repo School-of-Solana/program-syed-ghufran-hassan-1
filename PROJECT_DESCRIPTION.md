@@ -22,7 +22,7 @@ A decentralized note-taking application built on Solana that allows users to cre
  
 
 ## Program Architecture
-[TODO: Describe your Solana program's architecture. Explain the main instructions, account structures, and data flow.]
+ 
 
 ### PDA Usage
 In my Solana Notes dApp, I implemented a PDA system to create unique, deterministic addresses for storing user notes on-chain. Each note gets its own PDA account derived from a specific seed pattern.
