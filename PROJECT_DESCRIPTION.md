@@ -120,4 +120,4 @@ anchor test
 
 ### Additional Notes for Evaluators
 
-[TODO: Add any specific notes or context that would help evaluators understand your project better]
+This is my first Solana Dapp and it was excellent learning curve. Since solana was creating issue in compiling on my system so I used solana playground for development.
