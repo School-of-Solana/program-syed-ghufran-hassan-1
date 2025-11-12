@@ -120,4 +120,6 @@ anchor test
 
 ### Additional Notes for Evaluators
 
-This is my first Solana Dapp and it was excellent learning curve. 
+This is my first Solana Dapp and it was excellent learning curve. The program is deployed on
+
+https://explorer.solana.com/address/BU6kzpyjQ8EjALky6Y95QKTfiYSttGoqwLoXxnzetQVJ?cluster=devnet
