@@ -45,5 +45,6 @@ Total Size: 324 bytes (including 8-byte discriminator)
 The program is deployed on 
 
 https://explorer.solana.com/address/BU6kzpyjQ8EjALky6Y95QKTfiYSttGoqwLoXxnzetQVJ?cluster=devnet
+https://explorer.solana.com/tx/4kxh8UggBkrh5mrQLd1e1hNjMueQ2cAe96JXAmS4UPMSifhjJiVcsVy3NjzUCF99G3YdT53btWvggyALWxVSbpDK?cluster=devnet
 
 
