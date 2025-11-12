@@ -56,7 +56,7 @@ Seeds Used: [b"note", author.key().as_ref(), &note_id.to_le_bytes()]
 
 
 ### Account Structure
-[TODO: Describe your main account structures and their purposes]
+ 
 
 ```rust
 #[account]
@@ -73,23 +73,44 @@ impl Note {
                             4 + 280; // content - 4 bytes for string length + 280 chars max
 }
 ```
+- The Note account serves as persistent on-chain storage for user-generated content, providing:
 
+- Data Persistence: Notes are permanently stored on Solana blockchain
+
+- Ownership Verification: author field cryptographically links note to creator
+
+- Organization: note_id enables users to manage multiple notes
+
+- Efficient Storage: Fixed size allocation optimizes rent costs
+
+## Context Account Structure:
+
+```rust
+pub struct PublishNote<'info> {
+    pub note: Account<'info, Note>,      // The PDA note account being created
+    pub author: Signer<'info>,           // The user creating/paying for the note
+    pub system_program: Program<'info, System>, // Solana system program for account creation
+}
+```
 
 
 ## Testing
 
 ### Test Coverage
-[TODO: Describe your testing approach and what scenarios you covered]
+
+Comprehensive test suite covering both successful operations and error scenarios to ensure program reliability and security.
 
 **Happy Path Tests:**
-- Test 1: [Description]
-- Test 2: [Description]
-- ...
+
+- Test 1: `Successful Note Publication` - Verifies that a note can be created with valid parameters including note ID and content, properly storing all data in the PDA account
+- Test 2: `Multiple Notes per Author` - Confirms that users can create multiple distinct notes by using different note IDs, generating unique PDAs for each note
+- Test 3: `PDA Deterministic Addressing` - Ensures that the same seeds always generate the same PDA address for consistent note retrieval
+
 
 **Unhappy Path Tests:**
-- Test 1: [Description of error scenario]
-- Test 2: [Description of error scenario]
-- ...
+- Test 1: `Content Length Validation` - Verifies that notes exceeding 280 characters are properly rejected with the ContentTooLong error
+- Test 2: `Unauthorized Access Prevention` - Ensures that users cannot modify or access notes belonging to other authors
+- Test 3: `Duplicate Note Prevention` - Confirms that creating notes with the same ID for the same author properly handles account conflicts
 
 ### Running Tests
 ```bash
