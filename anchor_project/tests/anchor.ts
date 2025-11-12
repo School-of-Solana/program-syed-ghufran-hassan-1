@@ -1,21 +1,15 @@
 import BN from "bn.js";
 import * as web3 from "@solana/web3.js";
 import * as anchor from "@coral-xyz/anchor";
-import * as anchor from "@coral-xyz/anchor";
 import type { SolanaNotes } from "../target/types/solana_notes";
 
 describe("Solana Notes Program", () => {
-  // Configure the client to use the local cluster
-  anchor.setProvider(anchor.AnchorProvider.env());
-
-  const program = anchor.workspace.SolanaNotes as anchor.Program<SolanaNotes>;
-  
   const provider = anchor.AnchorProvider.env();
   anchor.setProvider(provider);
 
   const program = anchor.workspace.SolanaNotes;
 
-  it("should publish a note with note_id", async () => {
+ it("should publish a note with note_id", async () => {
     const noteId = new anchor.BN(1); // note_id as u64
     const noteContent = "This is my first note on Solana using Anchor!";
 
@@ -46,7 +40,7 @@ describe("Solana Notes Program", () => {
 
     // Verify the note
     const noteAccount = await program.account.note.fetch(notePda);
-    console.log(" Note created successfully!");
+    console.log("Note created successfully!");
     console.log("Note ID:", noteAccount.noteId.toString());
     console.log("Author:", noteAccount.author.toBase58());
     console.log("Content:", noteAccount.content);
@@ -85,6 +79,7 @@ describe("Solana Notes Program", () => {
     
     console.log(" Multiple notes per author supported!");
   });
+
   it("should prevent duplicate notes with same ID", async () => {
   const noteId = new anchor.BN(1);
   const content = "First attempt";
@@ -192,6 +187,32 @@ it("should prevent unauthorized users from modifying notes", async () => {
     throw new Error("Should have failed - unauthorized access!");
   } catch (error) {
     console.log(" Correctly prevented unauthorized access:", error.message);
+  }
+});
+it("should fail when operating on non-existent note", async () => {
+  const noteId = new anchor.BN(999); // Note that doesn't exist
+  const [notePda] = anchor.web3.PublicKey.findProgramAddressSync(
+    [
+      Buffer.from("note"),
+      provider.wallet.publicKey.toBuffer(),
+      noteId.toArrayLike(Buffer, "le", 8)
+    ],
+    program.programId
+  );
+
+  try {
+    // Try to update a note that was never created
+    await program.methods
+      .publishNote(noteId, "This should fail - note doesn't exist!")
+      .accounts({
+        note: notePda,
+        author: provider.wallet.publicKey,
+      })
+      .rpc();
+    
+    throw new Error("Should have failed - note account doesn't exist!");
+  } catch (error) {
+    console.log(" Correctly failed on non-existent note:", error.message);
   }
 });
 });
