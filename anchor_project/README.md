@@ -42,4 +42,8 @@ pub struct Note {
 ```
 Total Size: 324 bytes (including 8-byte discriminator)
 
+The program is deployed on 
+
+https://explorer.solana.com/address/BU6kzpyjQ8EjALky6Y95QKTfiYSttGoqwLoXxnzetQVJ?cluster=devnet
+
 
