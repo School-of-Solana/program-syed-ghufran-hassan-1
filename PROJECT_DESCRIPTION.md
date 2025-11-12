@@ -53,6 +53,7 @@ Seeds Used: [b"note", author.key().as_ref(), &note_id.to_le_bytes()]
 - Validation: Ensures content doesn't exceed 280 characters to optimize storage
 - Functionality: Initializes a new PDA account storing the author's public key, note ID, and content
 - Security: Only the signing author can create notes in their own namespace
+- **Account Updates**: Uses `init_if_needed` allowing note content updates while preserving note_id
 
 
 ### Account Structure
