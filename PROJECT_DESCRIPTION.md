@@ -18,7 +18,7 @@ A decentralized note-taking application built on Solana that allows users to cre
 ### How to Use the dApp
  
 1. **Main Action 1:** You need to add content
-2. **Main Action 2:** You need to publish note
+2. **Main Action 2:** You need to publish note which will then show pop regarding published note
  
 
 ## Program Architecture
